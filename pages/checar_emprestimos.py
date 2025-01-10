@@ -10,6 +10,10 @@ def mostrar_registros_hoje():
     # Busca os registros de empréstimo com a data de hoje
     registros_hoje = Emprestimo.select().where(Emprestimo.data_emprestimo == hoje)
     
+    # Verifica se não encontrou registros
+    if registros_hoje.count() == 0:
+        return "Não há registros"
+    
     # Cria uma lista de dicionários com os dados dos registros
     registros = [
         {
@@ -32,4 +36,4 @@ def mostrar_registros_hoje():
 st.subheader("Estes são os empréstimos de hoje:")
 
 emprestimosDeHoje = mostrar_registros_hoje()
-st.dataframe(emprestimosDeHoje)
+st.write(emprestimosDeHoje)
