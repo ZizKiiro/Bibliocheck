@@ -2,6 +2,8 @@ import streamlit as st
 from datetime import datetime, timedelta
 from peewee import fn
 from database.models import Emprestimo, db  # Importando o modelo e o banco de dados
+import time
+
 
 def create_emprestimo(nome_aluno, turma_aluno, data_emprestimo, titulo_livro, estado_livro, data_entrega=None):
     with db.atomic():
@@ -14,6 +16,7 @@ def create_emprestimo(nome_aluno, turma_aluno, data_emprestimo, titulo_livro, es
             titulo_livro=titulo_livro,
             estado_livro=estado_livro
         )
+        
 
 def read_emprestimos():
     emprestimos = Emprestimo.select()
@@ -104,3 +107,8 @@ with col1:
 with col2:
     dataEntrega = st.date_input('Data da Entrega:', value=prazo_padrao(), format="DD/MM/YYYY")
 criarRegistro = st.button('Cadastrar empréstimo', use_container_width=True, on_click=create_emprestimo, args=[nomeAluno, turmaAluno, dataEmprestimo, tituloLivro, estadoLivro, dataEntrega])
+placehoder = st.empty()
+if criarRegistro:
+    placehoder.success("Empréstimo cadastrado com sucesso!")
+    time.sleep(2)
+    placehoder.empty()
