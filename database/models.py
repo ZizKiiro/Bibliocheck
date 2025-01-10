@@ -13,3 +13,6 @@ class Emprestimo(BaseModel):
     data_entrega = DateField(null=True)      # Data de entrega, pode ser nula
     titulo_livro = CharField(max_length=255) # Título do livro
     estado_livro = CharField(max_length=100) # Estado do livro
+
+
+db.create_tables([Emprestimo])

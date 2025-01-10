@@ -5,8 +5,9 @@ from database.models import Emprestimo, db  # Importando o modelo e o banco de d
 
 def create_emprestimo(nome_aluno, turma_aluno, data_emprestimo, titulo_livro, estado_livro, data_entrega=None):
     with db.atomic():
+        nome_formatado = ' '.join([nome.capitalize() for nome in nome_aluno.split()])
         Emprestimo.create(
-            nome_aluno=nome_aluno,
+            nome_aluno=nome_formatado,
             turma_aluno=turma_aluno,
             data_emprestimo=data_emprestimo,
             data_entrega=data_entrega,
